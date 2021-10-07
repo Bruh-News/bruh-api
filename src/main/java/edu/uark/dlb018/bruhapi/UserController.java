@@ -50,6 +50,35 @@ public class UserController {
         return new ResponseEntity<Long>(id, HttpStatus.OK);
     }
 
+    @PostMapping("/setuserattribute")
+    public ResponseEntity SetUserAttribute(
+        @RequestParam(value="userId") Long userId,
+        @RequestParam(value="attributeName") String attributeName,
+        @RequestParam(value="attributeValue") String attributeValue
+    ){
+        String updateQuery = "UPDATE users SET " + attributeName + " = ? WHERE id = ?";
+        long id = 0;
+        try {
+            Class.forName("org.postgresql.Driver");
+            try (Connection conn = dbConnect();
+                 PreparedStatement pstmt = conn.prepareStatement(updateQuery,
+                         Statement.RETURN_GENERATED_KEYS)) {
+
+                pstmt.setString(1, attributeValue);
+                pstmt.setLong(2, userId);
+
+                pstmt.executeUpdate();
+                return new ResponseEntity(HttpStatus.OK);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return new ResponseEntity<Long>(id, HttpStatus.OK);
+    }
+
     @GetMapping("/getuser")
     public ResponseEntity<User> GetUser(@RequestParam(value = "id") Long id){
         String selectQuery = "SELECT * FROM users WHERE id=?";
@@ -70,6 +99,28 @@ public class UserController {
                     User foundUser = new User(un, email, pw);
                     return new ResponseEntity<User>(foundUser, HttpStatus.OK);
                 }
+
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/deleteallusers")
+    public ResponseEntity DeleteAllUsers(){
+        String selectQuery = "DELETE FROM users";
+        try {
+            Class.forName("org.postgresql.Driver");
+            try (Connection conn = dbConnect();
+                 PreparedStatement pstmt = conn.prepareStatement(selectQuery,
+                         Statement.RETURN_GENERATED_KEYS)) {
+
+                pstmt.executeQuery();
+                return new ResponseEntity(HttpStatus.OK);
 
             } catch(Exception e){
                 System.out.println(e.getMessage());
