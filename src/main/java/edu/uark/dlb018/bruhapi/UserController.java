@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RestController
 public class UserController {
-    private final String dbUrl = "postgres://ec2-35-171-171-27.compute-1.amazonaws.com:5432/d2bq84hem29g4o";
+    private final String dbUrl = "jdbc:postgresql://ec2-35-171-171-27.compute-1.amazonaws.com:5432/d2bq84hem29g4o";
     private final String dbUser = "lanhkxskvkvrqt";
     private final String dbPassword = "4344420cfef54ad993a6050bf7bc2434d09bf38981654b4d4b8e2e91e4288784";
 
@@ -18,32 +18,67 @@ public class UserController {
     public ResponseEntity<Long> CreateUser(@RequestBody User user){
         String insertQuery = "INSERT INTO users (username, email, password) VALUES(?,?,?)";
         long id = 0;
+        try {
+            Class.forName("org.postgresql.Driver");
+            try (Connection conn = dbConnect();
+                 PreparedStatement pstmt = conn.prepareStatement(insertQuery,
+                         Statement.RETURN_GENERATED_KEYS)) {
 
-        try (Connection conn = dbConnect();
-             PreparedStatement pstmt = conn.prepareStatement(insertQuery,
-                     Statement.RETURN_GENERATED_KEYS)) {
+                pstmt.setString(1, user.getUsername());
+                pstmt.setString(2, user.getEmail());
+                pstmt.setString(3, user.getPassword());
 
-            pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getEmail());
-            pstmt.setString(3, user.getPassword());
-
-            int affectedRows = pstmt.executeUpdate();
-            // check the affected rows
-            if (affectedRows > 0) {
-                // get the ID back
-                try (ResultSet rs = pstmt.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        id = rs.getLong(1);
+                int affectedRows = pstmt.executeUpdate();
+                // check the affected rows
+                if (affectedRows > 0) {
+                    // get the ID back
+                    try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            id = rs.getLong(1);
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(ex.getMessage());
                     }
-                } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
                 }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-        } catch (Exception e) {
+        } catch(Exception e){
             System.out.println(e.getMessage());
         }
 
         return new ResponseEntity<Long>(id, HttpStatus.OK);
+    }
+
+    @GetMapping("/getuser")
+    public ResponseEntity<User> GetUser(@RequestParam(value = "id") Long id){
+        String selectQuery = "SELECT * FROM users WHERE id=?";
+        try {
+            Class.forName("org.postgresql.Driver");
+            try (Connection conn = dbConnect();
+                 PreparedStatement pstmt = conn.prepareStatement(selectQuery,
+                         Statement.RETURN_GENERATED_KEYS)) {
+
+                pstmt.setLong(1, id);
+                ResultSet rs = pstmt.executeQuery();
+                if(!rs.next()){
+                    return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+                } else{
+                    String un = rs.getString("username");
+                    String email = rs.getString("email");
+                    String pw = rs.getString("password");
+                    User foundUser = new User(un, email, pw);
+                    return new ResponseEntity<User>(foundUser, HttpStatus.OK);
+                }
+
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
     }
 
     public Connection dbConnect() throws SQLException {
