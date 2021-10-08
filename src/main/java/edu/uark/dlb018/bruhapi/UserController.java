@@ -1,6 +1,8 @@
 package edu.uark.dlb018.bruhapi;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,23 +54,22 @@ public class UserController {
     }
 
     @PostMapping("/setuserattribute")
-    public ResponseEntity SetUserAttribute(
-        @RequestParam(value="userId") Long userId,
-        @RequestParam(value="attributeName") String attributeName,
-        @RequestParam(value="attributeValue") String attributeValue
-    ){
-        String updateQuery = "UPDATE users SET " + attributeName + " = ? WHERE id = ?";
+    public ResponseEntity SetUserAttribute(@RequestBody List<UserAttribute> attributes){
+        if(attributes.size() == 0) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        String updateQuery;
         try {
             Class.forName("org.postgresql.Driver");
-            try (Connection conn = dbConnect();
-                 PreparedStatement pstmt = conn.prepareStatement(updateQuery,
-                         Statement.RETURN_GENERATED_KEYS)) {
+            try (Connection conn = dbConnect();) {
+                for(int i = 0; i < attributes.size(); i++){
+                    updateQuery = "UPDATE users SET " + attributes.get(i).getAttributeName() + " = ? WHERE id = ?";
+                    PreparedStatement pstmt = conn.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
+                    pstmt = conn.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
+                    pstmt.setString(1, attributes.get(i).getAttributeValue());
+                    pstmt.setLong(2, attributes.get(i).getUserId());
 
-                pstmt.setString(1, attributeValue);
-                pstmt.setLong(2, userId);
-
-                pstmt.executeUpdate();
-                return new ResponseEntity(HttpStatus.OK);
+                    pstmt.executeUpdate();
+                    return new ResponseEntity(HttpStatus.OK);
+                }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

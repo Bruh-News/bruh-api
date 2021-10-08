@@ -1,3 +1,4 @@
 edu\uark\dlb018\bruhapi\ArkadiaApiApplication.class
 edu\uark\dlb018\bruhapi\User.class
+edu\uark\dlb018\bruhapi\UserAttribute.class
 edu\uark\dlb018\bruhapi\UserController.class
