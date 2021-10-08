@@ -36,6 +36,7 @@ public class UserController {
                         if (rs.next()) {
                             id = rs.getLong(1);
                         }
+                        return new ResponseEntity<Long>(id, HttpStatus.OK);
                     } catch (SQLException ex) {
                         System.out.println(ex.getMessage());
                     }
@@ -47,7 +48,7 @@ public class UserController {
             System.out.println(e.getMessage());
         }
 
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
+        return new ResponseEntity<Long>(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/setuserattribute")
@@ -57,7 +58,6 @@ public class UserController {
         @RequestParam(value="attributeValue") String attributeValue
     ){
         String updateQuery = "UPDATE users SET " + attributeName + " = ? WHERE id = ?";
-        long id = 0;
         try {
             Class.forName("org.postgresql.Driver");
             try (Connection conn = dbConnect();
@@ -76,7 +76,7 @@ public class UserController {
             System.out.println(e.getMessage());
         }
 
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/getuser")
@@ -91,12 +91,14 @@ public class UserController {
                 pstmt.setLong(1, id);
                 ResultSet rs = pstmt.executeQuery();
                 if(!rs.next()){
-                    return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+                    return new ResponseEntity<User>(HttpStatus.EXPECTATION_FAILED);
                 } else{
                     String un = rs.getString("username");
                     String email = rs.getString("email");
                     String pw = rs.getString("password");
+                    String pl = rs.getString("politicalleaning");
                     User foundUser = new User(un, email, pw);
+                    foundUser.setPoliticalLeaning(pl);
                     return new ResponseEntity<User>(foundUser, HttpStatus.OK);
                 }
 

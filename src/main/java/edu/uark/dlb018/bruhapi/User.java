@@ -4,6 +4,7 @@ public class User {
     private String Username;
     private String Email;
     private String Password;
+    private String PoliticalLeaning;
 
     User(String un, String email, String pw){
         Username = un;
@@ -22,4 +23,8 @@ public class User {
     public String getPassword() {
         return Password;
     }
+
+    public String getPoliticalLeaning() { return PoliticalLeaning; }
+
+    public void setPoliticalLeaning(String pl) { PoliticalLeaning = pl; }
 }
