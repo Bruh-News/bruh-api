@@ -1,4 +1,5 @@
-edu\uark\dlb018\bruhapi\ArkadiaApiApplication.class
-edu\uark\dlb018\bruhapi\User.class
-edu\uark\dlb018\bruhapi\UserAttribute.class
-edu\uark\dlb018\bruhapi\UserController.class
+edu\uark\dlb018\bruhapi\post\PostController.class
+edu\uark\dlb018\bruhapi\user\UserController.class
+edu\uark\dlb018\bruhapi\post\Post.class
+edu\uark\dlb018\bruhapi\user\User.class
+edu\uark\dlb018\bruhapi\user\UserAttribute.class

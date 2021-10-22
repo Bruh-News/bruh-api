@@ -8,11 +8,11 @@
 		<version>2.4.10</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.arkadia</groupId>
-	<artifactId>arkadia-api</artifactId>
+	<groupId>edu.uark.dlb018</groupId>
+	<artifactId>bruhapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>arkadia-api</name>
-	<description>API for Arkadia Retrocade's website</description>
+	<name>bruhapi</name>
+	<description>API for the Bruh app</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -38,6 +38,13 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.2.24</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.5.0-b01</version>
 		</dependency>
 	</dependencies>
 

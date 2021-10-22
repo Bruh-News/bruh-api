@@ -1,4 +1,4 @@
-package edu.uark.dlb018.bruhapi;
+package edu.uark.dlb018.bruhapi.user;
 
 public class UserAttribute {
     private long UserId;
