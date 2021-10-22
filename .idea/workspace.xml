@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ced284b-a406-445f-a35a-9eb28832a3fd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bruh-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bruh-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/ArkadiaApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/BruhApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/UserAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/user/UserAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uark/dlb018/bruhapi/ArkadiaApiApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uark/dlb018/bruhapi/BruhApiApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,11 +118,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/user/UserController.java</url>
           <line>65</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

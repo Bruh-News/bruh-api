@@ -1,6 +1,8 @@
 package edu.uark.dlb018.bruhapi.post;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.uark.dlb018.bruhapi.post.Post;
 import edu.uark.dlb018.bruhapi.user.User;
@@ -70,7 +72,7 @@ public class PostController {
                 } else{
                     Long uid = rs.getLong("u_id");
                     String posttext = rs.getString("posttext");
-                    Timestamp datetime = rs.getTimestamp("datetime");
+                    Long datetime = rs.getTimestamp("datetime").getTime()/1000;
                     Long pid = rs.getLong("p_id");
                     Post foundPost = new Post(uid, posttext, datetime, pid);
                     return new ResponseEntity<Post>(foundPost, HttpStatus.OK);
@@ -84,6 +86,43 @@ public class PostController {
         }
 
         return new ResponseEntity<Post>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/getallpostsbyuser")
+    ResponseEntity<List<Post>> GetAllPostsByUser(@RequestParam(value="id") long id){
+        String selectQuery = "SELECT * FROM posts WHERE u_id=?";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            try (Connection conn = dbConnect();
+                 PreparedStatement pstmt = conn.prepareStatement(selectQuery,
+                         Statement.RETURN_GENERATED_KEYS)) {
+
+                pstmt.setLong(1, id);
+                ResultSet rs = pstmt.executeQuery();
+                if(!rs.next()){
+                    return new ResponseEntity<List<Post>>(HttpStatus.EXPECTATION_FAILED);
+                } else{
+                    List<Post> posts = new ArrayList<Post>();
+                    do {
+                        Long uid = rs.getLong("u_id");
+                        String posttext = rs.getString("posttext");
+                        Long datetime = rs.getTimestamp("datetime").getTime()/1000;
+                        Long pid = rs.getLong("p_id");
+                        Post foundPost = new Post(uid, posttext, datetime, pid);
+                        posts.add(foundPost);
+                    } while(rs.next());
+                    return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+                }
+
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return new ResponseEntity<List<Post>>(HttpStatus.BAD_REQUEST);
     }
 
     public Connection dbConnect() throws SQLException {

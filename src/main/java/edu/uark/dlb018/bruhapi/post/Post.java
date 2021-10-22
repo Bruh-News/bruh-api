@@ -15,13 +15,6 @@ public class Post {
         ParentId = pid;
     }
 
-    public Post(long uid, String postText, Timestamp datetime, long pid){
-        UserId = uid;
-        PostText = postText;
-        DateTime = datetime;
-        ParentId = pid;
-    }
-
     public long getUserId() {
         return UserId;
     }
