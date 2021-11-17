@@ -160,7 +160,7 @@ public class PostController {
         int pageLength = 12;
         if(postsByDiffUsers.size() < pageLength * (page - 1)) return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
-        double paginationMultiplier = (Math.random() * 0.25) + 0.5;
+        double paginationMultiplier = /*(Math.random() * 0.25) + 0.5*/ 0.6;
         long skip = (long)((double)postsByDiffUsers.size() * paginationMultiplier);
         boolean isPrime = isPrime(skip);
         while(!isPrime && postsByDiffUsers.size() > 3){
