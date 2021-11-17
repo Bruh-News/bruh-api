@@ -231,6 +231,49 @@ public class PostController {
         return new ResponseEntity<List<Post>>(HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/getcommentsonpost")
+    public ResponseEntity<List<Post>> GetCommentsOnPost(@RequestParam(value="id") long id){
+        String selectQuery = "SELECT * FROM posts WHERE p_id=?";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            try (Connection conn = dbConnect();
+                 PreparedStatement pstmt = conn.prepareStatement(selectQuery,
+                         Statement.RETURN_GENERATED_KEYS)) {
+
+                pstmt.setLong(1, id);
+                ResultSet rs = pstmt.executeQuery();
+                if(!rs.next()){
+                    return new ResponseEntity<List<Post>>(HttpStatus.EXPECTATION_FAILED);
+                } else{
+                    List<Post> posts = new ArrayList<Post>();
+                    do {
+                        Long uid = rs.getLong("u_id");
+                        String posttext = rs.getString("posttext");
+                        Long datetime = rs.getTimestamp("datetime").getTime()/1000;
+                        Long pid = rs.getLong("p_id");
+                        String media = rs.getString("media");
+                        Post foundPost;
+                        if(media != null){
+                            foundPost = new Post(uid, posttext, datetime, pid, media);
+                        } else{
+                            foundPost = new Post(uid, posttext, datetime, pid);
+                        }
+                        posts.add(foundPost);
+                    } while(rs.next());
+                    return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+                }
+
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return new ResponseEntity<List<Post>>(HttpStatus.BAD_REQUEST);
+    }
+
     public Connection dbConnect() throws SQLException {
         return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
     }

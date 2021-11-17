@@ -7,7 +7,6 @@
     <list default="true" id="4ced284b-a406-445f-a35a-9eb28832a3fd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/user/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
