@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.sql.Timestamp;
-import java.util.Base64;
 
 public class Post {
     private long UserId;
@@ -13,6 +12,7 @@ public class Post {
     private long ParentId;
     private String Media;
 
+    //minimal constructor
     public Post(long uid, String postText, long secondsSinceEpoch){
         UserId = uid;
         PostText = postText;
@@ -21,6 +21,7 @@ public class Post {
         Media = null;
     }
 
+    //constructor with parent and no media
     public Post(long uid, String postText, long secondsSinceEpoch, long pid){
         UserId = uid;
         PostText = postText;
@@ -29,6 +30,7 @@ public class Post {
         Media = null;
     }
 
+    //constructor with media and no parent
     @JsonCreator
     public Post(@JsonProperty("uid") long uid,
                 @JsonProperty("postText") String postText,
@@ -41,6 +43,7 @@ public class Post {
         Media = media;
     }
 
+    //constructor with parent and media
     @JsonCreator
     public Post(@JsonProperty("uid") long uid,
                 @JsonProperty("postText") String postText,
@@ -54,6 +57,7 @@ public class Post {
         Media = media;
     }
 
+    //getters
     public long getUserId() {
         return UserId;
     }
@@ -72,6 +76,7 @@ public class Post {
 
     public String getMedia() { return Media; }
 
+    //setters
     public void setUserId(long userId) {
         UserId = userId;
     }
