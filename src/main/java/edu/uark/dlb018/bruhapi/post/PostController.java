@@ -32,7 +32,7 @@ public class PostController {
                 pstmt.setString(2, post.getPostText());
                 pstmt.setTimestamp(3, post.getDateTime());
                 pstmt.setLong(4, post.getParentId());
-                pstmt.setBytes(5, post.getMedia());
+                pstmt.setString(5, post.getMedia());
 
                 int affectedRows = pstmt.executeUpdate();
                 // check the affected rows
@@ -75,7 +75,7 @@ public class PostController {
                     String posttext = rs.getString("posttext");
                     Long datetime = rs.getTimestamp("datetime").getTime()/1000;
                     Long pid = rs.getLong("p_id");
-                    byte[] media = rs.getBytes("media");
+                    String media = rs.getString("media");
                     Post foundPost;
                     if(media != null){
                         foundPost = new Post(uid, posttext, datetime, pid, media);
@@ -116,7 +116,7 @@ public class PostController {
                         String posttext = rs.getString("posttext");
                         Long datetime = rs.getTimestamp("datetime").getTime()/1000;
                         Long pid = rs.getLong("p_id");
-                        byte[] media = rs.getBytes("media");
+                        String media = rs.getString("media");
                         Post foundPost;
                         if(media != null){
                             foundPost = new Post(uid, posttext, datetime, pid, media);

@@ -5,16 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.sql.Timestamp;
 import java.util.Base64;
-import javax.persistence.Lob;
 
 public class Post {
     private long UserId;
     private String PostText;
     private Timestamp DateTime;
     private long ParentId;
-
-    @Lob
-    private byte[] Media;
+    private String Media;
 
     public Post(long uid, String postText, long secondsSinceEpoch, long pid){
         UserId = uid;
@@ -22,14 +19,6 @@ public class Post {
         DateTime = new Timestamp(1000 * secondsSinceEpoch);
         ParentId = pid;
         Media = null;
-    }
-
-    public Post(long uid, String postText, long secondsSinceEpoch, long pid, byte[] media){
-        UserId = uid;
-        PostText = postText;
-        DateTime = new Timestamp(1000 * secondsSinceEpoch);
-        ParentId = pid;
-        Media = media;
     }
 
     @JsonCreator
@@ -42,7 +31,7 @@ public class Post {
         PostText = postText;
         DateTime = new Timestamp(1000 * secondsSinceEpoch);
         ParentId = pid;
-        Media = Base64.getDecoder().decode(media);
+        Media = media;
     }
 
     public long getUserId() {
@@ -61,7 +50,7 @@ public class Post {
         return ParentId;
     }
 
-    public byte[] getMedia() { return Media; }
+    public String getMedia() { return Media; }
 
     public void setUserId(long userId) {
         UserId = userId;
@@ -79,5 +68,5 @@ public class Post {
         ParentId = parentId;
     }
 
-    public void setMedia(byte[] media){ Media = media; }
+    public void setMedia(String media){ Media = media; }
 }

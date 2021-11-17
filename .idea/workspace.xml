@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ced284b-a406-445f-a35a-9eb28832a3fd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bruh-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bruh-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" afterDir="false" />
     </list>
@@ -125,19 +122,14 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/Post.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/Post.java</url>
-          <line>40</line>
+          <line>29</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
