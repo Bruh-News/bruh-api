@@ -13,12 +13,32 @@ public class Post {
     private long ParentId;
     private String Media;
 
+    public Post(long uid, String postText, long secondsSinceEpoch){
+        UserId = uid;
+        PostText = postText;
+        DateTime = new Timestamp(1000 * secondsSinceEpoch);
+        ParentId = 0;
+        Media = null;
+    }
+
     public Post(long uid, String postText, long secondsSinceEpoch, long pid){
         UserId = uid;
         PostText = postText;
         DateTime = new Timestamp(1000 * secondsSinceEpoch);
         ParentId = pid;
         Media = null;
+    }
+
+    @JsonCreator
+    public Post(@JsonProperty("uid") long uid,
+                @JsonProperty("postText") String postText,
+                @JsonProperty("secondsSinceEpoch") long secondsSinceEpoch,
+                @JsonProperty("media") String media){
+        UserId = uid;
+        PostText = postText;
+        DateTime = new Timestamp(1000 * secondsSinceEpoch);
+        ParentId = 0;
+        Media = media;
     }
 
     @JsonCreator
