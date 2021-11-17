@@ -151,7 +151,8 @@ public class PostController {
             List<Post> postsByUserI = GetAllPostsByUser(diffUsers.get(i)).getBody();
             if(postsByUserI != null) {
                 for (int j = 0; j < postsByUserI.size(); j++) {
-                    postsByDiffUsers.add(postsByUserI.get(j));
+                    if(postsByUserI.get(j).getParentId() == 0)
+                        postsByDiffUsers.add(postsByUserI.get(j));
                 }
             }
         }
