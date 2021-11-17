@@ -12,7 +12,7 @@ public class User {
     private String ParentalStatus;
     private String Gender;
 
-    User(String un, String email, String pw){
+    public User(String un, String email, String pw){
         Username = un;
         Email = email;
         Password = pw;
