@@ -1,6 +1,11 @@
 package edu.uark.dlb018.bruhapi.post;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Timestamp;
+import java.util.Base64;
+import javax.persistence.Lob;
 
 public class Post {
     private long UserId;
@@ -8,11 +13,36 @@ public class Post {
     private Timestamp DateTime;
     private long ParentId;
 
+    @Lob
+    private byte[] Media;
+
     public Post(long uid, String postText, long secondsSinceEpoch, long pid){
         UserId = uid;
         PostText = postText;
         DateTime = new Timestamp(1000 * secondsSinceEpoch);
         ParentId = pid;
+        Media = null;
+    }
+
+    public Post(long uid, String postText, long secondsSinceEpoch, long pid, byte[] media){
+        UserId = uid;
+        PostText = postText;
+        DateTime = new Timestamp(1000 * secondsSinceEpoch);
+        ParentId = pid;
+        Media = media;
+    }
+
+    @JsonCreator
+    public Post(@JsonProperty("uid") long uid,
+                @JsonProperty("postText") String postText,
+                @JsonProperty("secondsSinceEpoch") long secondsSinceEpoch,
+                @JsonProperty("pid") long pid,
+                @JsonProperty("media") String media){
+        UserId = uid;
+        PostText = postText;
+        DateTime = new Timestamp(1000 * secondsSinceEpoch);
+        ParentId = pid;
+        Media = Base64.getDecoder().decode(media);
     }
 
     public long getUserId() {
@@ -31,6 +61,8 @@ public class Post {
         return ParentId;
     }
 
+    public byte[] getMedia() { return Media; }
+
     public void setUserId(long userId) {
         UserId = userId;
     }
@@ -46,4 +78,6 @@ public class Post {
     public void setParentId(long parentId) {
         ParentId = parentId;
     }
+
+    public void setMedia(byte[] media){ Media = media; }
 }

@@ -19,7 +19,7 @@ public class PostController {
 
     @PostMapping("/createpost")
     public ResponseEntity<Long> CreatePost(@RequestBody Post post){
-        String insertQuery = "INSERT INTO posts (u_id, posttext, datetime, p_id) VALUES(?,?,?,?)";
+        String insertQuery = "INSERT INTO posts (u_id, posttext, datetime, p_id, media) VALUES(?,?,?,?,?)";
         long id = 0;
 
         try {
@@ -32,6 +32,7 @@ public class PostController {
                 pstmt.setString(2, post.getPostText());
                 pstmt.setTimestamp(3, post.getDateTime());
                 pstmt.setLong(4, post.getParentId());
+                pstmt.setBytes(5, post.getMedia());
 
                 int affectedRows = pstmt.executeUpdate();
                 // check the affected rows
@@ -74,7 +75,13 @@ public class PostController {
                     String posttext = rs.getString("posttext");
                     Long datetime = rs.getTimestamp("datetime").getTime()/1000;
                     Long pid = rs.getLong("p_id");
-                    Post foundPost = new Post(uid, posttext, datetime, pid);
+                    byte[] media = rs.getBytes("media");
+                    Post foundPost;
+                    if(media != null){
+                        foundPost = new Post(uid, posttext, datetime, pid, media);
+                    } else{
+                        foundPost = new Post(uid, posttext, datetime, pid);
+                    }
                     return new ResponseEntity<Post>(foundPost, HttpStatus.OK);
                 }
 
@@ -109,7 +116,13 @@ public class PostController {
                         String posttext = rs.getString("posttext");
                         Long datetime = rs.getTimestamp("datetime").getTime()/1000;
                         Long pid = rs.getLong("p_id");
-                        Post foundPost = new Post(uid, posttext, datetime, pid);
+                        byte[] media = rs.getBytes("media");
+                        Post foundPost;
+                        if(media != null){
+                            foundPost = new Post(uid, posttext, datetime, pid, media);
+                        } else{
+                            foundPost = new Post(uid, posttext, datetime, pid);
+                        }
                         posts.add(foundPost);
                     } while(rs.next());
                     return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
