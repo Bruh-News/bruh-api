@@ -111,7 +111,8 @@ public class PostController {
     //this one is a bit more algorithmic, had a lot of fun writing it
     @GetMapping("/getpostsinuserfeed")
     ResponseEntity<List<Post>> GetPostsInUserFeed(@RequestParam(value="id") long id,
-                                                  @RequestParam(value="page") int page){
+                                                  @RequestParam(value="page") int page,
+                                                  @RequestParam(value="pageLength") int pageLength){
         //define selection query - this one requires a bit of explaining
         //this query selects all users' IDs such that their user attributes differ from those of
             //the given user in at least one way
@@ -195,10 +196,8 @@ public class PostController {
             }
         }
 
-        //set the pagelength in one place so if we want to change it later it's easy to change.
-        //this might change to be a user preference later, in which case it would be passed to this endpoint.
-        int pageLength = 7;
         //make sure there will be at least one post on this page of posts
+        //page size is passed in, retrieved from user preferences
         if(postsByDiffUsers.size() < pageLength * (page - 1)) return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
         //find some prime number smaller than the number of posts but hopefully as large as possible to
