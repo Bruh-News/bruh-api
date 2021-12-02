@@ -197,7 +197,7 @@ public class PostController {
 
         //set the pagelength in one place so if we want to change it later it's easy to change.
         //this might change to be a user preference later, in which case it would be passed to this endpoint.
-        int pageLength = 12;
+        int pageLength = 7;
         //make sure there will be at least one post on this page of posts
         if(postsByDiffUsers.size() < pageLength * (page - 1)) return new ResponseEntity(HttpStatus.BAD_REQUEST);
 

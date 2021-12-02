@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4ced284b-a406-445f-a35a-9eb28832a3fd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uark/dlb018/bruhapi/post/PostController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,11 +40,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../arkadia-api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
