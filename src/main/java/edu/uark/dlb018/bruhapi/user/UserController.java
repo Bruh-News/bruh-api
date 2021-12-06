@@ -132,6 +132,36 @@ public class UserController {
         return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<Long> Login(
+            @RequestParam(value="username") String username,
+            @RequestParam(value="password") String password) {
+        String selectQuery = "SELECT * FROM users WHERE username=? AND password=?";
+        try {
+            Class.forName("org.postgresql.Driver");
+            try (Connection conn = dbConnect();
+                 PreparedStatement pstmt = conn.prepareStatement(selectQuery,
+                         Statement.RETURN_GENERATED_KEYS)) {
+
+                pstmt.setString(1, username);
+                pstmt.setString(2, password);
+                ResultSet rs = pstmt.executeQuery();
+                if(!rs.next()){
+                    return new ResponseEntity(HttpStatus.EXPECTATION_FAILED);
+                } else{
+                    return new ResponseEntity<Long>(rs.getLong("id"), HttpStatus.OK);
+                }
+
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
     @GetMapping("/deleteallusers")
     public ResponseEntity DeleteAllUsers(){
         String selectQuery = "DELETE FROM users";
