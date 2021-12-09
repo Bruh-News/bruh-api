@@ -13,7 +13,10 @@ public class Post {
     private String Media;
 
     //minimal constructor
-    public Post(long uid, String postText, long secondsSinceEpoch){
+    @JsonCreator
+    public Post(@JsonProperty("uid") long uid,
+                @JsonProperty("postText") String postText,
+                @JsonProperty("secondsSinceEpoch") long secondsSinceEpoch){
         UserId = uid;
         PostText = postText;
         DateTime = new Timestamp(1000 * secondsSinceEpoch);
@@ -22,7 +25,11 @@ public class Post {
     }
 
     //constructor with parent and no media
-    public Post(long uid, String postText, long secondsSinceEpoch, long pid){
+    @JsonCreator
+    public Post(@JsonProperty("uid") long uid,
+                @JsonProperty("postText") String postText,
+                @JsonProperty("secondsSinceEpoch") long secondsSinceEpoch,
+                @JsonProperty("pid") long pid){
         UserId = uid;
         PostText = postText;
         DateTime = new Timestamp(1000 * secondsSinceEpoch);
