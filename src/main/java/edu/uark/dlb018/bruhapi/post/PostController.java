@@ -7,6 +7,7 @@ import java.util.List;
 import edu.uark.dlb018.bruhapi.post.Post;
 import edu.uark.dlb018.bruhapi.user.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,10 @@ public class PostController {
     private final String dbPassword = "4344420cfef54ad993a6050bf7bc2434d09bf38981654b4d4b8e2e91e4288784";
 
     //POST endpoint to create new site post
-    @PostMapping("/createpost")
-    public ResponseEntity<Long> CreatePost(@RequestBody Post post){
+    @PostMapping(value = "/createpost")
+    public ResponseEntity<Long> CreatePost(@RequestParam(value="uid") Long uid,
+                                           @RequestParam(value="postText") String postText,
+                                           @RequestParam(value="secondsSinceEpoch") Long secondsSinceEpoch){
         //define insert query
         String insertQuery = "INSERT INTO posts (u_id, posttext, datetime, p_id, media) VALUES(?,?,?,?,?)";
         long id = 0;
@@ -34,11 +37,12 @@ public class PostController {
                          Statement.RETURN_GENERATED_KEYS)) {
 
                 //insert post info into query
-                pstmt.setLong(1, post.getUserId());
-                pstmt.setString(2, post.getPostText());
-                pstmt.setTimestamp(3, post.getDateTime());
-                pstmt.setLong(4, post.getParentId());
-                pstmt.setString(5, post.getMedia());
+                pstmt.setLong(1, uid);
+                pstmt.setString(2, postText);
+                pstmt.setTimestamp(3, new Timestamp(1000 * secondsSinceEpoch));
+                //oops, didn't work last second, default values inbound!
+                pstmt.setLong(4, 0);
+                pstmt.setString(5, null);
 
                 int affectedRows = pstmt.executeUpdate();
                 // check the affected rows

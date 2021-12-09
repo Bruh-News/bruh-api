@@ -25,7 +25,6 @@ public class Post {
     }
 
     //constructor with parent and no media
-    @JsonCreator
     public Post(@JsonProperty("uid") long uid,
                 @JsonProperty("postText") String postText,
                 @JsonProperty("secondsSinceEpoch") long secondsSinceEpoch,
@@ -38,7 +37,6 @@ public class Post {
     }
 
     //constructor with media and no parent
-    @JsonCreator
     public Post(@JsonProperty("uid") long uid,
                 @JsonProperty("postText") String postText,
                 @JsonProperty("secondsSinceEpoch") long secondsSinceEpoch,
@@ -51,7 +49,6 @@ public class Post {
     }
 
     //constructor with parent and media
-    @JsonCreator
     public Post(@JsonProperty("uid") long uid,
                 @JsonProperty("postText") String postText,
                 @JsonProperty("secondsSinceEpoch") long secondsSinceEpoch,
